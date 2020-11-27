@@ -75,7 +75,7 @@ export const register = (user) => dispatch => {
     }).catch(err => {
        getError(err.response.data,err.response.status,"register_err")
         removeFromStorage("auth")
-        setInStorage("isauthendicate",false);
+        setInStorage("isauthendicate",true);
 
         dispatch({ type: REGISTER_FAIL })
     })

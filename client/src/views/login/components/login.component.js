@@ -32,7 +32,7 @@ class Register extends Component {
     onSubmit = (e) => {
         e.preventDefault();
       
-const {email,password}=this.state;
+        const {email,password}=this.state;
         const user={
            email,password
         }

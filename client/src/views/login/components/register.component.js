@@ -28,7 +28,7 @@ const {username,email,password}=this.state;
         }
         console.log(user)
         this.props.register(user)
-        // this.toggole();
+        this.toggole();
     }
     
     onChangeusername = (e) => {
