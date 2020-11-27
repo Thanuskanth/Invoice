@@ -143,12 +143,12 @@ class UpdateCustomer extends Component {
       <div >
          {this.props.data?
     <div>
-     <RiBillLine color="blue" size={20} className="mr-3" onClick={this.ontogglereceiptdetail} /> 
-     <Pencil color="green" size={20} className="mr-3" onClick={this.ontogglereceipt} />
+     <RiBillLine color="blue" size={20} className="mr-3" onClick={this.ontoggleDebit} /> 
+     <Pencil color="green" size={20} className="mr-3" onClick={this.ontoggleDebitDet} />
      </div>
 
     :
-    <RiBillLine color="blue" size={20} className="mr-3" onClick={this.ontogglereceiptdetail} /> 
+    <RiBillLine color="blue" size={20} className="mr-3" onClick={this.ontoggleDebit} /> 
 
     }
         {/* <RiBillLine color="blue" size={20} className="mr-3" onClick={this.ontoggleDebit} /> 

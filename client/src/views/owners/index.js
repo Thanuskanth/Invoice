@@ -9,11 +9,26 @@ import Update from './update';
 import{ getFromStorage,setInStorage} from "../../storage/index"
 
 class ListOwner extends Component {
+
+  printChart(){
+
+    var myParameters = window.location.search;// Get the parameters from the current page
+
+    var URL = "http://localhost:3000/print";
+
+    var W = window.open(URL);
+
+    W.window.print(); // Is this the right syntax ? This prints a blank page and not the above URL
+   W.window.close();
+}
+
 componentDidMount(){
             this.props.getOwner();
+            // this.printChart()
           }
 
     render() {
+     
       const auth= getFromStorage("isauthendicate"); 
 
         const ownerdata=this.props.owner.owner.map(owner=>
