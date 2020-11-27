@@ -1,0 +1,8 @@
+{
+    "jwtSecred":"my_jwt_sec",
+    "ATLAS_URI"    : "mongodb+srv://thanus:thanus123@cluster0-tiu2e.mongodb.net/test?retryWrites=true&w=majority"
+
+
+
+
+}
