@@ -20,13 +20,16 @@ class UpdateCustomer extends Component {
     modelreceipt: false,
     modelreceiptdet: false,
     modeldebit: false,
-    modeldebitdet: false
+    modeldebitdet: false,
+      amount:false
+
     
 
   }
 
   componentDidMount() {
-    this.props.getinvoicedec()
+    this.props.getinvoicedec();
+   
 
   }
   ontoggleInvoice = () => {
@@ -115,13 +118,22 @@ class UpdateCustomer extends Component {
       <div >
         {/* <RiBillLine color="blue" size={20} className="mr-3" onClick={this.ontoggleInvoice} /> */}
         {/* <Pencil color="green" size={20} className="mr-3" onClick={this.ontoggle} /> */}
-        <RiBillLine color="blue" size={20} className="mr-3" onClick={this.ontogglereceiptdetail} />
-        <Pencil color="green" size={20} className="mr-3" onClick={this.ontogglereceipt} />
+        {/* <RiBillLine color="blue" size={20} className="mr-3" onClick={this.ontogglereceiptdetail} />
+        <Pencil color="green" size={20} className="mr-3" onClick={this.ontogglereceipt} /> */}
         {/* <ImBin color="red" size={20} className="mr-3" onClick={this.ontoggleDebit} /> */}
 
 
 
+        {this.props.data?
+    <div>
+     <RiBillLine color="blue" size={20} className="mr-3" onClick={this.ontogglereceiptdetail} /> 
+     <Pencil color="green" size={20} className="mr-3" onClick={this.ontogglereceipt} />
+     </div>
 
+    :
+    <RiBillLine color="blue" size={20} className="mr-3" onClick={this.ontogglereceiptdetail} /> 
+
+    }
 
 
 

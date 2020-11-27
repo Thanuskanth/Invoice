@@ -13,7 +13,7 @@ router.get('/',auth,(req, res) =>
         .then(user => res.json(user))
 );
 
-router.post('/add',auth,(req, res) => {
+router.post('/add',(req, res) => {
     const { username, email, password } = req.body;
     console.log(req.body,"req.body")
     if (!username || !email || !password) { return res.status(400).json({ msg: "fill all field" }) };

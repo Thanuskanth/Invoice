@@ -79,7 +79,7 @@ class ListItem extends Component {
           width: 270
         },
         {
-          label: 'Action',
+          label: 'View',
           field: 'action',
 
           width: 270

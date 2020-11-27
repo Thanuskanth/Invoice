@@ -34,14 +34,7 @@ class FromTo extends React.PureComponent {
         return parseInt(this.state.invoice.total) - (parseInt(receipt) + parseInt(debit));
 
     }
-    getbalance() {
-        return this.props.balance.filter(x => x.invoice_id == this.props.id).map(x => {
-            this.setState({
-                debitamount: x.amount,
-                id: x.id
-            })
-        })
-    }
+    
     state = {
         receipt: {},
         from: {},
@@ -87,7 +80,6 @@ class FromTo extends React.PureComponent {
                 amount: this.state.debitamount - this.state.amount
 
             }
-            this.props.updateBALANCE(newamount)
 
             this.setState({
                 but: "EDIT",
@@ -132,7 +124,6 @@ class FromTo extends React.PureComponent {
         return [day, mnth, date.getFullYear()].join("-");
     }
     render() {
-        this.getbalance()
 
         // setInStorage("receipt", this.props.curent)
         
@@ -287,7 +278,6 @@ const mapStateToProps = (state) => ({
 
     curent: state.receipt.curent,
     iscurent: state.receipt.iscurent,
-    balance: state.balance.balance,
     receipt: state.receipt.receipt
 
 

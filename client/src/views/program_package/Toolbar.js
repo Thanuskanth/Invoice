@@ -9,16 +9,18 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+import { getPackage } from '../../actions/packageaction';
+import { getProgram } from '../../actions/programaction';
 import {
   Box,
 
-  Checkbox,
+  InputLabel,
   Container,
-  FormHelperText,
+  MenuItem,
   Link,
   TextField,
   Typography,
-  makeStyles
+  Select
 } from '@material-ui/core';
 class AddProgram extends Component {
   state = {
@@ -26,6 +28,16 @@ class AddProgram extends Component {
     program: "",
     package: "",
     amount: "",
+
+  }
+  componentDidMount() {
+    this.props.getProgram();
+    this.props.getPackage();
+   
+
+
+
+
 
   }
 
@@ -107,11 +119,40 @@ class AddProgram extends Component {
                       color="textSecondary"
                       variant="h3"
                     >
-                      Create new Item
+                      Create new Program Package
                   </Typography>
 
                   </Box>
-                  <TextField
+                 
+                  <Box   class="input-group mb-3" style={{
+                    height:60
+                  }}>
+                   
+                   <select class="custom-select" id="inputGroupSelect01" onChange={this.onChangeprogram}>
+                    <option selected>Program Name</option>
+                    {this.props.program.map((program) => (
+                      <option value={program.program_name}>{program.program_name}</option>
+                    )
+                    )
+                    }
+                  </select>
+
+                  </Box>
+                  <Box   class="input-group mb-3" style={{
+                    height:30
+                  }}>
+                  <select class="custom-select " required onChange={this.onChangepackage} >
+                  <option selected>Package Name</option>
+                      {this.props.package.map((pac) => (
+                        <option value={pac.package_name}>{pac.package_name}</option>
+                      )
+                      )
+                      }
+                    </select>
+
+                  </Box>
+                  
+                  {/* <TextField
 
                     fullWidth
                     required
@@ -131,7 +172,7 @@ class AddProgram extends Component {
                     variant="outlined"
                     onChange={this.onChangepackage}
 
-                  />
+                  /> */}
                   <TextField
                     fullWidth
                     required
@@ -145,11 +186,11 @@ class AddProgram extends Component {
 
 
 
-                  <Box ml={20}>
+                  <Box  style={{marginTop:20}}>
                     <Button
                       color="primary"
                       fullWidth
-                      size="large"
+                      size="block"
                       type="submit"
 
                     >
@@ -168,6 +209,12 @@ class AddProgram extends Component {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  owner: state.owner.owner,
+  package: state.package.package,
+  program: state.program.program,
+ 
 
-export default connect(null, { addpropac })(AddProgram);
+})
+export default connect(mapStateToProps, { addpropac,getPackage,getProgram })(AddProgram);
 

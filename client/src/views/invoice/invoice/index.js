@@ -6,6 +6,9 @@ import { MDBDataTable } from 'mdbreact';
 import { MDBDataTableV5 } from 'mdbreact';
 
 import { getinvoice } from '../../../actions/invoiceacttion';
+import { getreceipt } from '../../../actions/receiptaction';
+import { getdebit } from '../../../actions/debitaction';
+// import { getreceipt } from '../../../actions/de';
 import { Card, CardContent, Box, Container } from '@material-ui/core';
 import Page from 'src/components/Page';
 import Toolbar from './Toolbar';
@@ -16,7 +19,11 @@ import{ getFromStorage,setInStorage} from "../../../storage"
 
 class ListItem extends Component {
   componentDidMount() {
+
     this.props.getinvoice();
+    this.props.getdebit();
+    this.props.getreceipt();
+
   }
   convert(str) {
     var date = new Date(str),
@@ -25,9 +32,18 @@ class ListItem extends Component {
     return [day, mnth, date.getFullYear()].join("-");
   }
   render() {
+    
     const auth= getFromStorage("isauthendicate"); 
 
     const itemdata = this.props.invoice.map(invoice => {
+
+      const receipt = this.props.receipt.filter(x => x.invoice_id == invoice.id).reduce((count, { amount }) => count + parseInt(amount), 0);
+      const debit = this.props.debit.filter(x => x.invoiceId == invoice.id).reduce((count, { total }) => count + parseInt(total), 0);
+      const data=parseInt(invoice.total) - (parseInt(receipt) + parseInt(debit))
+      var dat=false;
+      if(data>0){
+        dat=true
+      }
       return {
         id:"AK-"+ invoice.id,
         program: invoice.program,
@@ -35,11 +51,12 @@ class ListItem extends Component {
         name: invoice.customer_name,
         date:this.convert(invoice.createdAt) ,
         status:invoice.status,
+         amount:data,
 
-
-        invoice:<Update id={invoice.id}/>,
-        debit:<Debit id={invoice.id}/>,
-        receipt:<Receipt id={invoice.id}/>,
+        
+        invoice:<Update id={invoice.id} />,
+        receipt:<Receipt id={invoice.id} data={dat}/>,
+        debit:<Debit id={invoice.id} data={dat}/>,
       }
 
     });
@@ -74,6 +91,12 @@ class ListItem extends Component {
         {
           label: 'Date',
           field: 'date',
+
+          width: 100
+        },
+        {
+          label: 'Balance Due',
+          field: 'amount',
 
           width: 100
         },
@@ -142,6 +165,8 @@ class ListItem extends Component {
 
 const mapStateToProps = (state) => ({
   invoice: state.invoice.invoice,
+  receipt: state.receipt.receipt,
+  debit: state.debit.debit
 
 })
-export default connect(mapStateToProps, { getinvoice })(ListItem);
+export default connect(mapStateToProps, { getinvoice ,getreceipt,getdebit})(ListItem);

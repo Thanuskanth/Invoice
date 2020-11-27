@@ -42,7 +42,7 @@ router.get('/:id',auth, (req, res) => {
 
 router.get('/',auth, (req, res) => {
 
-    Invoice.findAll().then(invoice =>res.json(invoice))
+    Invoice.findAll({ include: ["debit"] }).then(invoice =>res.json(invoice))
 
         .catch(err => res.status(400).json(err));
 })

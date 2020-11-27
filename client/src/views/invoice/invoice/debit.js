@@ -19,13 +19,20 @@ class UpdateCustomer extends Component {
     modelreceipt: false,
     modelreceiptdet: false,
     modeldebit: false,
-    modeldebitdet: false
+    modeldebitdet: false, 
+     amount:false
+
     
 
   }
 
   componentDidMount() {
     this.props.getinvoicedec()
+    if(this.props.amount>0){
+      this.setState({
+        amount:true
+      })
+    }
 
   }
   ontoggleInvoice = () => {
@@ -104,15 +111,48 @@ class UpdateCustomer extends Component {
 
 
 
+
   }
+
+
   render() {
     
+//  {if (this.props.amount>0) {
+//   return   <div>
+//     {this.state.amount?
+//     <div>
+//      <RiBillLine color="blue" size={20} className="mr-3" onClick={this.ontoggleDebit} /> 
+//      <Pencil color="green" size={20} className="mr-3" onClick={this.ontoggleDebitDet} />
+//      </div>
+
+//     :
+//     <RiBillLine color="blue" size={20} className="mr-3" onClick={this.ontoggleDebit} /> 
+
+//     }
+      
+//     </div>   
+//  }
+// else{
+//  return <RiBillLine color="blue" size={20} className="mr-3" onClick={this.ontoggleDebit} /> 
+
+// }
+// }
+
     const { modeldebit, modeldebitdet } = this.state;
     return (
-
       <div >
-        <RiBillLine color="blue" size={20} className="mr-3" onClick={this.ontoggleDebit} /> 
-        <Pencil color="green" size={20} className="mr-3" onClick={this.ontoggleDebitDet} />
+         {this.props.data?
+    <div>
+     <RiBillLine color="blue" size={20} className="mr-3" onClick={this.ontogglereceiptdetail} /> 
+     <Pencil color="green" size={20} className="mr-3" onClick={this.ontogglereceipt} />
+     </div>
+
+    :
+    <RiBillLine color="blue" size={20} className="mr-3" onClick={this.ontogglereceiptdetail} /> 
+
+    }
+        {/* <RiBillLine color="blue" size={20} className="mr-3" onClick={this.ontoggleDebit} /> 
+        <Pencil color="green" size={20} className="mr-3" onClick={this.ontoggleDebitDet} /> */}
 
         <Modal
                     show={modeldebit}
@@ -125,7 +165,7 @@ class UpdateCustomer extends Component {
               </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                      <ViewDebit id={this.props.id}/>
+                      <ViewDebit id={this.props.id} amount={this.props.amount}/>
                   
                     </Modal.Body>
 

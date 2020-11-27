@@ -81,7 +81,7 @@ componentDidMount(){
                 width: 200
             },
                 {
-                    label: 'Action',
+                    label: 'View',
                     field: 'action',
                     
                     width: 200

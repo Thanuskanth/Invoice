@@ -432,10 +432,10 @@ class Table extends React.PureComponent {
             <div class="container">
               <div class="row">
                 <div class="col-2 pt-2">
-                  <button
+                  {/* <button
                     disabled={!this.props.iscurent}
                     type="button" class="btn btn-success left"
-                    onClick={this.addRow}><AiOutlinePlus /></button>
+                    onClick={this.addRow}><AiOutlinePlus /></button> */}
                 </div>
                 <div class="col-4">
 

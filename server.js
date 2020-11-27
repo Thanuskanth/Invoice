@@ -14,6 +14,12 @@ db.sequelize.sync( console.log("database connected "));
 const port = process.env.PORT ||  8080;
 // const uri = process.env.ATLAS_URI;
 
+// var corsOptions = {
+//     origin: "http://localhost:8080"
+//   };
+  
+//   app.use(cors(corsOptions));
+  
 const customerRouter = require('./Routes/api/customer');
 const packageRouter = require('./Routes/api/package');
 const programRouter = require('./Routes/api/program');

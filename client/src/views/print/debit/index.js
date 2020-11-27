@@ -84,7 +84,7 @@ class NavBar extends Component {
                             <div className="row fontd">
                                 <div className="col-5"> <p style={{ textAlign: "" }} >DN-{this.state.debit.id} </p></div>
                                 <div className="col-7"> <p className="" style={{ textAlign: "" }}> {this.convert(this.state.debit.createdAt)} </p></div>
-                                <div className="col-5"> <p className="" style={{ textAlign: "", paddingTop: 15 }}>{this.state.invoice.id} </p></div>
+                                <div className="col-5"> <p className="" style={{ textAlign: "", paddingTop: 15 }}>AK-{this.state.invoice.id} </p></div>
                                 <div className="col-7"> <p className="" style={{ textAlign: "", paddingTop: 15 }}>{this.state.debit.balance_due} </p></div>
 
                             </div>
@@ -156,7 +156,7 @@ class NavBar extends Component {
                             <div className="row fontd">
                                 <div className="col-5"> <p style={{ textAlign: "" }} >DN-{this.state.debit.id} </p></div>
                                 <div className="col-7"> <p className="" style={{ textAlign: "" }}> {this.convert(this.state.debit.createdAt)} </p></div>
-                                <div className="col-5"> <p className="" style={{ textAlign: "", paddingTop: 15 }}>{this.state.invoice.id} </p></div>
+                                <div className="col-5"> <p className="" style={{ textAlign: "", paddingTop: 15 }}>AK-{this.state.invoice.id} </p></div>
                                 <div className="col-7"> <p className="" style={{ textAlign: "", paddingTop: 15 }}>{this.state.debit.balance_due} </p></div>
 
                             </div>

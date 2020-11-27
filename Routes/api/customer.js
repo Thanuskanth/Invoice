@@ -33,7 +33,7 @@ router.post('/:id',auth, (req, res) => {
     
 });
 
-router.get('/:id',auth, (req, res) => {
+router.get('/:id', (req, res) => {
 
     Customer.findByPk(req.params.id).then(customer => res.json(customer))
 
