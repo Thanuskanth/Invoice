@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-../react-material-dashboard-master/node_modules
+/react-material-dashboard-master/node_modules
 /.pnp
 .pnp.js
 
