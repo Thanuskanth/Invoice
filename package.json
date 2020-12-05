@@ -3,7 +3,7 @@
   "name": "invoice",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "predeploy": "npm run build --prefix client",
     "deploy": "gh-pages -d build",
