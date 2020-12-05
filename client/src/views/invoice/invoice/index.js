@@ -3,19 +3,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { MDBDataTable } from 'mdbreact';
-import { MDBDataTableV5 } from 'mdbreact';
-
 import { getinvoice } from '../../../actions/invoiceacttion';
 import { getreceipt } from '../../../actions/receiptaction';
 import { getdebit } from '../../../actions/debitaction';
-// import { getreceipt } from '../../../actions/de';
 import { Card, CardContent, Box, Container } from '@material-ui/core';
 import Page from 'src/components/Page';
 import Toolbar from './Toolbar';
 import Update from './update';
 import Receipt from './receipt';
 import Debit from './debit';
-import{ getFromStorage,setInStorage} from "../../../storage"
+import{ getFromStorage} from "../../../storage"
 
 class ListItem extends Component {
   componentDidMount() {
@@ -34,7 +31,15 @@ class ListItem extends Component {
   render() {
     
     const auth= getFromStorage("isauthendicate"); 
-
+    this.props.invoice.sort(function(a, b) {
+      var keyA =a.id,
+        keyB = b.id;
+      // Compare the 2 dates
+      if (keyA < keyB) return -1;
+      if (keyA > keyB) return 1;
+      return 0;
+    });
+    
     const itemdata = this.props.invoice.map(invoice => {
 
       const receipt = this.props.receipt.filter(x => x.invoice_id == invoice.id).reduce((count, { amount }) => count + parseInt(amount), 0);
@@ -45,10 +50,10 @@ class ListItem extends Component {
         dat=true
       }
       return {
-        id:"AK-"+ invoice.id,
-        program: invoice.program,
-        package: invoice.package,
-        name: invoice.customer_name,
+        id: invoice.owners.tag +" - "+ invoice.id,
+        program: invoice.programs.program_name,
+        package: invoice.packages.package_name,
+        name: invoice.customers.customer_name,
         date:this.convert(invoice.createdAt) ,
         status:invoice.status,
          amount:data,
@@ -152,6 +157,7 @@ class ListItem extends Component {
                  striped
                  hover
                  data={data}
+                 responsive
             />
             </CardContent>
             </Card>

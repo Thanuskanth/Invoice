@@ -20,7 +20,7 @@ import Logo from 'src/components/Logo';
 import PrintProvider, { NoPrint } from 'react-easy-print';
 
 const useStyles = makeStyles(() => ({
-  root: {display:"none"},
+  root: { zIndex:0},
   avatar: {
     width: 60,
     height: 60,
@@ -49,12 +49,7 @@ const TopBar = ({
           <Logo />
         </RouterLink>
         <Box flexGrow={1} />
-        <Hidden mdDown>
-          
-          <Register />
-         
-          <Login />
-        </Hidden>
+       
         <Hidden lgUp>
           <IconButton
             color="inherit"

@@ -59,7 +59,7 @@ class AddProgram extends Component {
                             <Form.Group as={Row} controlId="formPlaintextPassword">
 
                                 <Col sm="10">
-                                    <Form.Control type="text" onChange={this.onChange} placeholder="Enter  Program" />
+                                    <Form.Control type="text" onChange={this.onChange} autofocus placeholder="Enter  Program" />
                                 </Col>
                                 <Button variant="primary" sm="2" type="submit">
                                     Save

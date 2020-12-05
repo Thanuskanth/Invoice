@@ -1,14 +1,12 @@
 import React from 'react';
-
 import './FromTo.css'
 import {getAinvoice} from '../../../../actions/invoiceacttion';
 import{getFromStorage,setInStorage}from "../../../../storage"
-
 import { connect } from 'react-redux';
 import image from "./logo.PNG"
 import {header} from '../../../../actions/authaction'; 
 import axios from 'axios';
-
+ 
 class FromTo extends React.PureComponent {
   convert(str) {
     var date = new Date(str),
@@ -19,12 +17,16 @@ class FromTo extends React.PureComponent {
   componentDidMount() {
 
 
-    axios.get('http://localhost:8080/invoice/' + this.props.data,header(getFromStorage("auth"))).then(res => {
+    axios.get('http://localhost:8080/invoice/' + this.props.id,header(getFromStorage("auth"))).then(res => {
       console.log(res.data,"customer response")
       this.setState({
          
         invoice:res.data,
-        address:JSON.parse(res.data.address)
+        customer:res.data.customers,
+        owners:res.data.owners,
+        program:res.data.programs,
+        package:res.data.packages,
+        address:JSON.parse(res.data.customers.address)
           
       })
       setInStorage("program",res.data);
@@ -34,7 +36,12 @@ class FromTo extends React.PureComponent {
   }
   state = {
   invoice:[],
-  address:[]
+  address:[],
+  owners:[],
+  customer:[],
+  program:[],
+  package:[],
+ 
   }
 
   render() {
@@ -56,18 +63,18 @@ console.log(this.state.invoice,"gbgbgbgb")
                 <div class="form-group row">
                   <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
                   <div class="col-sm-10">
-                  <input type="text"  class="form-control datepica " disabled  value={this.state.invoice.customer_name}  />
+                  <input type="text"  class="form-control datepica " disabled  value={this.state.customer.customer_name}  />
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="staticEmail" class="col-sm-2 col-form-label">NIC</label>
                   <div class="col-sm-10">
-                  <input type="text"  class="form-control datepica" disabled value={this.state.invoice.nic} />
+                  <input type="text"  class="form-control datepica" disabled value={this.state.customer.nic} />
                   </div>
                 </div><div class="form-group row">
                   <label for="staticEmail" class="col-sm-2 col-form-label">Phone</label>
                   <div class="col-sm-10">
-                  <input type="text"  class="form-control datepica" disabled value={this.state.invoice.phonenumber}/>
+                  <input type="text"  class="form-control datepica" disabled value={this.state.customer.phonenumber}/>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -95,7 +102,7 @@ console.log(this.state.invoice,"gbgbgbgb")
                 <div class="card-header  ">INVOICE NO</div>
                 <div class="card-body ">
 
-                  <p> AK-{this.state.invoice.id}</p>
+                  <p>{this.state.owners.tag} -{this.state.invoice.id}</p>
                 </div>
               </div>
               <div class="card  mr-1" >
@@ -109,7 +116,7 @@ console.log(this.state.invoice,"gbgbgbgb")
             <div class="card mb-2" >
               <div class="card-header  ">PROGRAM</div>
               <div class="card-body">
-              <p>{this.state.invoice.program}</p>
+              <p>{this.state.program.program_name}</p>
 
               </div>
             </div>
@@ -117,7 +124,7 @@ console.log(this.state.invoice,"gbgbgbgb")
               <div class="card mr-1  col-lg-6" >
                 <div class="card-header  ">PACKAGE</div>
                 <div class="card-body">
-                <p>{this.state.invoice.package}</p>
+                <p>{this.state.package.package_name}</p>
 
                 </div>
               </div>

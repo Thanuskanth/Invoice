@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import { removeFromStorage, setInStorage, getFromStorage } from "../../storage/index"
 import { addinvoicedec, updateinvoicedec, } from '../../actions/itemdescription'
 import { addreceipt, updatereceipt } from '../../actions/receiptaction'
-
+ import Print from "../print/receipt/sample"
 const today = new Date();
 
 class FromTo extends React.PureComponent {
@@ -215,8 +215,8 @@ class FromTo extends React.PureComponent {
 
                     </div>
                   </div>
-
-                      <button type="submit" class="btn btn-primary btn-lg generate btn-block" disabled={!this.state.isprint} >PRINT</button>
+      <Print/>
+                      {/* <button type="submit" class="btn btn-primary btn-lg generate btn-block" disabled={!this.state.isprint} >PRINT</button> */}
                 </div>
 
                 {/* right */}

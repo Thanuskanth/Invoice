@@ -33,6 +33,7 @@ const authRouter = require('./Routes/api/auth');
 const userRouter = require('./Routes/api/userroute');
 const receiptRouter = require('./Routes/api/receipt');
 const debitRouter = require('./Routes/api/debitnote');
+const serviceRouter = require('./Routes/api/service');
 const debitDesRouter = require('./Routes/api/debitnotedescription');
 
 app.use(express.json());
@@ -49,6 +50,7 @@ app.use('/auth',authRouter );
 app.use('/user',userRouter );
 app.use('/receipt', receiptRouter);
 app.use('/debit', debitRouter);
+app.use('/service', serviceRouter);
 app.use('/debit_description', debitDesRouter);
 
 if (process.env.NODE_ENV === 'production') {

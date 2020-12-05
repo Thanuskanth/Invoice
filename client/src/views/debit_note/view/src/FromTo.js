@@ -51,21 +51,29 @@ onSubmitinvoicedec = (e) => {
   })
 
   
-}
+} 
 
   componentDidMount() {
     this.props.getreceipt();
     console.log(this.props.debit, "this.props.debit.invoiceId")
 
       axios.get('http://localhost:8080/debit/debit/' + this.props.id, header(getFromStorage("auth"))).then(res => {
-      setInStorage("debit",res.data)
-      setInStorage("debit_total",res.data.debit.total)
+      //   if(res.data.total != null ){
+      //     // setInStorage("debit_total",res.data.receipt.total)
+
+      //   }
+      //   else{
+      //     setInStorage("debit_total",0)
+
+      //   }
+      // setInStorage("debit",res.data.receipt)
 
       this.setState({
 
-        invoice: res.data.invoice,
-        address:JSON.parse(res.data.invoice.address),
-        debit:res.data.debit
+        invoice: res.data.receipt.invoice,
+        address:JSON.parse(res.data.customer.address),
+        debit:res.data.receipt,
+        customer:res.data.customer,
 
       })
     })
@@ -89,6 +97,7 @@ onSubmitinvoicedec = (e) => {
   invoice:{},
   debit:{},
   address:[],
+  customer:[],
   amount:0,
   gen:false,
   total:0,
@@ -110,18 +119,18 @@ onSubmitinvoicedec = (e) => {
                 <div class="form-group row">
                   <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
                   <div class="col-sm-10">
-                  <input type="text"  class="form-control datepica " disabled  value={this.state.invoice.customer_name}  />
+                  <input type="text"  class="form-control datepica " disabled  value={this.state.customer.customer_name}  />
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="staticEmail" class="col-sm-2 col-form-label">NIC</label>
                   <div class="col-sm-10">
-                  <input type="text"  class="form-control datepica" disabled value={this.state.invoice.nic} />
+                  <input type="text"  class="form-control datepica" disabled value={this.state.customer.nic} />
                   </div>
                 </div><div class="form-group row">
                   <label for="staticEmail" class="col-sm-2 col-form-label">Phone</label>
                   <div class="col-sm-10">
-                  <input type="text"  class="form-control datepica" disabled value={this.state.invoice.phonenumber}/>
+                  <input type="text"  class="form-control datepica" disabled value={this.state.customer.phonenumber}/>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -172,7 +181,7 @@ onSubmitinvoicedec = (e) => {
               <div class="card  mr-1"style={{height:190}} >
                 <div class="card-header ">BALANCE DUE</div>
                 <div class="card-body " style={{display:"flex",justifyContent:"center"}}>
-                <p>{this.state.debit.balance_due}</p>
+                <p>{parseInt(this.state.debit.balance_due).toFixed(2)}</p>
 
                 </div>
               </div>

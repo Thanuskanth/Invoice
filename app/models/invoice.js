@@ -9,34 +9,38 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.DOUBLE,
         
       },
+      // owner: {
+      //   type: Sequelize.STRING,
+        
+      // },
       status: {
         type: Sequelize.STRING,
         
       },
-      package: {
-        type: Sequelize.STRING
-      },
-      program: {
-        type: Sequelize.STRING
-      },
-      owner: {
-        type: Sequelize.STRING
-      },
+      // package: {
+      //   type: Sequelize.STRING
+      // },
+      // program: {
+      //   type: Sequelize.STRING
+      // },
+      // owner: {
+      //   type: Sequelize.STRING
+      // },
       date: {
         type: Sequelize.DATE
       },
-      customer_name: {
-        type: Sequelize.STRING
-      },
-      nic: {
-        type: Sequelize.STRING
-      },
-      address: {
-        type: Sequelize.STRING
-      },
-      phonenumber: {
-        type: Sequelize.STRING
-      }
+      // customer_name: {
+      //   type: Sequelize.STRING
+      // },
+      // nic: {
+      //   type: Sequelize.STRING
+      // },
+      // address: {
+      //   type: Sequelize.STRING
+      // },
+      // phonenumber: {
+      //   type: Sequelize.STRING
+      // }
     });
   
     return Invoice;

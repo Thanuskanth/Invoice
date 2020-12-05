@@ -4,7 +4,6 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken');
 const db = require("../../app/models");
 const config = require('config');
-
 const User = db.user;
 
 const auth = require('../../middleware/auth');
@@ -12,18 +11,18 @@ const auth = require('../../middleware/auth');
 router.post('/login', (req, res) => {
     const { password, email } = req.body;
     if (!password || !email) {
-        return res.status(400).json("fill all fields!")
+        return res.status(400).json({msg:"fill all fields!"})
 
     };
 
     User.findOne({  where: { email: email }}).then(user =>{
         bcrypt.compare(password, user.password).then(ismathch => {
             
-            if (!ismathch) { return res.status(400).json("credencials does not match") }
+            if (!ismathch) { return res.status(400).json({msg:"credencials does not match"}) }
             jwt.sign(
                 {id:user.id},
                 config.get('jwtSecred'),
-                {expiresIn:3600},
+                // {expiresIn:3600},
                 (err,token)=>{
                     if(err) throw err;
                     res.json({
@@ -33,9 +32,9 @@ router.post('/login', (req, res) => {
                     })
                 }
             )
-        })
+        }).catch(err =>{ res.status(400).json({msg:"Password not match"})})
      } )
-        .catch(err =>{ res.status(400).json("Email does not exists")})
+        .catch(err =>{ res.status(400).json({msg:"Email does not exists"})})
 
 
 

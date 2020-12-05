@@ -6,48 +6,61 @@ const Program_package = db.program_package;
 // const User = require('../../Models/UserModel');
 const auth = require('../../middleware/auth');
 
-router.post('/add',auth, (req, res) => {
-    const { program,pac,amount} = req.body;
+router.post('/add', auth, (req, res) => {
+    const { programId, packageId, amount, items, ownerId ,service} = req.body;
 
 
-    if ( !amount || !pac || !program) {
+    if (!amount || !packageId || !programId || !items || !ownerId) {
         return res.status(400).json("fill all fields!")
     };
-    const customer = new Program_package(
-        { program,pac,amount }
+    const program_package = new Program_package(
+        { programId, packageId, amount, items, ownerId,service }
     )
-    customer.save()
-    .then(customer=>res.json(customer))
-    .catch(err => res.status(400).json(err));
- });
-router.delete('/:id',auth, (req, res) => {
-    Program_package.destroy({where: { id: req.params.id }})
-        .then(customer => res.json(customer))
+    program_package.save()
+        .then(program_package => {
+            Program_package.findByPk(program_package.id, { include:  ["owners","programs","packages"] }).then(invoice => res.json(invoice))
+
+
+        }
+
+        )
+        .catch(err => res.status(400).json(err));
+});
+router.delete('/:id', auth, (req, res) => {
+    Program_package.destroy({ where: { id: req.params.id } })
+        .then(program_package => res.json(program_package))
         .catch(err => res.status(400).json(err));
 });
 
-router.post('/:id',auth, (req, res) => {
-    const {customer_name } = req.body;
-    Program_package.update(req.body,{ where: { id: req.params.id }})
-   .then((customer)=>res.json(customer)).catch(err =>{ res.status(400).json(err)})
+router.post('/:id', auth, (req, res) => {
+    Program_package.update(req.body, { where: { id: req.params.id } })
+        .then(pac=>{
 
-    
+            Program_package.findByPk(req.params.id, { include:  ["owners","programs","packages"]}).then(program_package => res.json(program_package))
+        })
+            .catch(err => { res.status(400).json(err) })
+
+
 });
 
-router.get('/:id',auth, (req, res) => {
+router.get('/:id', auth, (req, res) => {
 
-    Program_package.findByPk(req.params.id).then(customer => res.json({ 
-        id:customer.id,
-        pac:customer.package,
-        program:customer.program,
-        amount:customer.amount}))
+    Program_package.findByPk(req.params.id, { include:  ["owners","programs","packages"] }).then(program_package => res.json(program_package
+        // {
+        //     id: program_package.id,
+        //     pac: program_package.package,
+        //     program: program_package.program,
+        //     amount: program_package.amount
+        // }
+
+    ))
 
         .catch(err => res.status(400).json(err));
 });
 
-router.get('/',auth, (req, res) => {
+router.get('/', auth, (req, res) => {
 
-    Program_package.findAll().then(customer =>res.json(customer))
+    Program_package.findAll({ include: ["owners","programs","packages"] }).then(program_package => res.json(program_package))
 
         .catch(err => res.status(400).json(err));
 })

@@ -7,14 +7,14 @@ const Item = db.items;
 const auth = require('../../middleware/auth');
 
 router.post('/add',auth, (req, res) => {
-    const { item_name,detail,amount } = req.body;
+    const { item_name,detail,amount,service } = req.body;
 
 
-    if (!item_name  || !detail || !amount ) {
+    if (!item_name   || !amount ) {
         return res.status(400).json("fill all fields!")
     };
     const item = new Item(
-        {  item_name,detail,amount  }
+        {  item_name,detail,amount ,service }
     )
     item.save()
     .then(item=>res.json(item))
@@ -27,7 +27,6 @@ router.delete('/:id',auth, (req, res) => {
 });
 
 router.post('/:id',auth, (req, res) => {
-    const { item_name,detail,amount  } = req.body;
     Item.update(req.body,{ where: { id: req.params.id }})
    .then((item)=>res.json(item)).catch(err =>{ res.status(400).json(err)})
 

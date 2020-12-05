@@ -10,19 +10,8 @@ import { getreceipt } from '../../actions/receiptaction';
 
 const today = new Date();
 
+
 class FromTo extends React.PureComponent {
-    
-printChart=()=>{
- alert("hi")
-    var myParameters = window.location.search;// Get the parameters from the current page
-
-    var URL = "http://localhost:3000/print_receipt"+myParameters;
-
-    var W = window.open(URL);
-
-    W.window.print(); // Is this the right syntax ? This prints a blank page and not the above URL
-   W.window.close();
-}
     componentDidMount() {
            axios.get('http://localhost:8080/receipt/receipt/' + this.props.id, header(getFromStorage("auth"))).then(res => {
             setInStorage("receipt",res.data)
@@ -278,8 +267,7 @@ printChart=()=>{
                                     </div>
 
                                     {/* <button type="submit" class="btn btn-primary btn-lg generate btn-block" style={{ marginBottom: 20 }} >{this.state.but}</button> */}
-                                      <button type="button" class="btn MT-2 btn-primary btn-lg generate btn-block" onClick={this.printChart()} > PRINT</button>
-                                    {/* <a href="/print_receipt">  <button type="button" class="btn MT-2 btn-primary btn-lg generate btn-block"  > PRINT</button></a> */}
+                                    <a href="/print_receipt">  <button type="button" class="btn MT-2 btn-primary btn-lg generate btn-block"  > PRINT</button></a>
 
 
 

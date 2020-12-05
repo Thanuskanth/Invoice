@@ -6,7 +6,11 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING
       },
       detail: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      service: {
+        type: Sequelize.STRING(1234)
       },
       amount: {
         type: Sequelize.DOUBLE

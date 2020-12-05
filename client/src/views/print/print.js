@@ -10,12 +10,11 @@ import { useReactToPrint } from 'react-to-print';
  
  
   window.onafterprint = function(){
-   alert("dd...");
  }
   return (
    <div >
-     <NavBarcolor ref={componentRef}  />
-     <NavBar ref={componentRef}  />
+     <NavBarcolor   />
+     <NavBar   />
 
    </div>
      

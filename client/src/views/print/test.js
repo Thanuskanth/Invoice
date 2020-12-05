@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Navbar, Container, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem } from 'reactstrap';
-import "../bill/src/FromTo.css"
+import "../invoice/create/src/FromTo.css"
 import { connect } from 'react-redux';
 import { getFromStorage, removeFromStorage, setInStorage } from "../../storage"
 import { Redirect } from 'react-router-dom'

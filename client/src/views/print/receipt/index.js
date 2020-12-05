@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Navbar, Container, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem } from 'reactstrap';
-import "../../bill/src/FromTo.css"
+import "../../invoice/create/FromTo.css"
 import { connect } from 'react-redux';
 import { getFromStorage, removeFromStorage, setInStorage } from "../../../storage"
 import { Redirect } from 'react-router-dom'
@@ -18,7 +18,8 @@ class NavBar extends Component {
     }
 
 
-    inWords(num) {
+    inWords(num) 
+    {
         // if ((num = num.toString()).length > 9) return 'overflow';
         const n = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
         if (!n) return; var str = '';
@@ -26,7 +27,7 @@ class NavBar extends Component {
         str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
         str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'thousand ' : '';
         str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'hundred ' : '';
-        str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'only ' : '';
+        str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + ' only ' : '';
         return str;
     }
 
@@ -60,7 +61,7 @@ class NavBar extends Component {
         return (
 
 
-            <div className="printviewreceipt" style={{ height: 1400 }}>
+            <div className="printviewreceipt" style={{ height: 1410 }}>
                 <div style={{height:625}}>
                 <div className="row" style={{}}>
 
@@ -179,12 +180,12 @@ class NavBar extends Component {
 
 
 
-                <button onClick={window.print(), window.onafterprint = function () {
+                {/* <button onClick={window.print(), window.onafterprint = function () {
 
                     removeFromStorage("receipt");
                     // removeFromStorage("program");
                     window.location.replace("/app/invoice")
-                }}>tk</button>
+                }}>tk</button> */}
                 <div className="row font" style={{ paddingTop: 20 }}>
                     <div className="col-9"></div>
                     {/* <div className="col-3">{parseInt(this.state.item.total).toFixed(2)}</div> */}

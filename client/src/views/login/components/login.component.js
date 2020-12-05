@@ -3,12 +3,13 @@ import { v4 as uuidv4 } from 'uuid';
 import { connect } from 'react-redux';
 import {login} from '../../../actions/authaction';
 import {clearError} from '../../../actions/erroraction';
+import {getFromStorage} from "../../../storage"
 
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form, FormGroup, Container, NavLink, Alert } from 'reactstrap';
 class Register extends Component {
     state = {
         modal: false,
-      
+        msg:"",
         password: '',
         email: '',
         err:""
@@ -38,7 +39,7 @@ class Register extends Component {
         }
      
         this.props.login(user)
-        this.toggole();
+        // this.toggole(); 
 
     }
     
@@ -50,7 +51,7 @@ class Register extends Component {
     }
     componentDidUpdate(prevProps){
         const {error}= this.props;
-        if(error !== prevProps.error){
+        if(error != prevProps.error){
             if(error.id == "login_error"){
                 this.setState({
                     msg:error.msg.msg
@@ -64,15 +65,15 @@ class Register extends Component {
         }
 
         if(this.state.modal){
-            if(this.props.isAutenticate){
+            if(getFromStorage("isauthendicate")){
                 this.toggole();
                 
             }
         }
     }
     render() {
+        const auth=getFromStorage("isauthendicate")
         return (
-
             <div>
 
                 <NavLink color="dark" onClick={this.toggole} href="#" >Login</NavLink>
@@ -88,7 +89,7 @@ class Register extends Component {
                             </FormGroup>
                             <FormGroup>
                                 <Label for="password">Password</Label>
-                                <Input type="text" id="password" onChange={this.onChangepassword} placeholder="Enter Password " />
+                                <Input type="password" id="password" onChange={this.onChangepassword} placeholder="Enter Password " />
                             </FormGroup>
                             <Button>Submit</Button>
 

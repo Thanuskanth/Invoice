@@ -4,7 +4,10 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING
       },
       nic: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
+
       },
       address: {
         type: Sequelize.STRING

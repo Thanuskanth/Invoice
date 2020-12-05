@@ -7,14 +7,14 @@ const Owner = db.owners;
 const auth = require('../../middleware/auth');
 
 router.post('/add',auth, (req, res) => {
-    const { owner_name } = req.body;
+    const { owner_name ,tag} = req.body;
 
 
-    if (!owner_name) {
+    if (!owner_name || !tag) {
         return res.status(400).json("fill all fields!")
     };
     const owner = new Owner(
-        { owner_name }
+        { owner_name ,tag}
     )
     owner.save()
     .then(owner=>res.json(owner))
@@ -27,7 +27,7 @@ router.delete('/:id',auth, (req, res) => {
 });
 
 router.post('/:id',auth, (req, res) => {
-    const {owners_name } = req.body;
+   
     Owner.update(req.body,{ where: { id: req.params.id }})
    .then((owner)=>res.json(owner)).catch(err =>{ res.status(400).json(err)})
 

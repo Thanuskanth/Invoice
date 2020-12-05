@@ -13,19 +13,21 @@ import { removeFromStorage, setInStorage, getFromStorage } from "../../../../sto
 import { adddebit, deletedebitcurent, updatedebit } from '../../../../actions/debitaction';
 import { adddebitdec, updatedebitdec } from '../../../../actions/debitdescription';
 import {header} from '../../../../actions/authaction'; 
+import Print from '../../../print/debit/sample'; 
 import axios from 'axios';
 class Table extends React.PureComponent {
   componentDidMount() {
 
 
       axios.get('http://localhost:8080/debit/debit_des/' + this.props.id, header(getFromStorage("auth"))).then(res => {
-      setInStorage("debitdet",res.data.debit)
+      setInStorage("debitdet",res.data)
 
       this.setState({
 
        
-        debit:res.data.debit,
-        debitdes:res.data,
+        debit:res.data.debitnote.debit_description,
+        debitdes:res.data.debitnote,
+        show:true
 
       })
     })
@@ -415,7 +417,7 @@ class Table extends React.PureComponent {
 
 
             <div class="form-group  ">
-            {data.amount}
+            {parseInt(data.amount).toFixed(2)}
             </div>
 
             
@@ -446,7 +448,7 @@ class Table extends React.PureComponent {
                       Total
     </div>
                     <div class="col-6 totalamount">
-                      <span className='total-number'>{this.state.debitdes.total}</span>
+                      <span className='total-number'>{parseInt(this.state.debitdes.total).toFixed(2)}</span>
                     </div>
 
                   </div>
@@ -470,8 +472,11 @@ class Table extends React.PureComponent {
 
             </div>
             <div class="col-4">
-              <a href="/print_debit"><button type="button" class="btn btn-lg btn-primary btn-block print"  >print</button></a>
-
+              {/* <a href="/print_debit"><button type="button" class="btn btn-lg btn-primary btn-block print"  >print</button></a> */}
+  
+  {this.state.show?
+  <Print/>
+  :"" }
             </div>
           </div>
 

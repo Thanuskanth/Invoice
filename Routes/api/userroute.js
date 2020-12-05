@@ -7,6 +7,7 @@ const db = require("../../app/models");
 
 const User = db.user;
 const auth =require('../../middleware/auth');
+const { json } = require('body-parser');
 
 router.get('/',auth,(req, res) =>
     User.findAll()
@@ -70,4 +71,38 @@ router.get('/:id',auth,(req, res) => {
 
 
 });
+
+router.post('/password/:id', auth, (req, res) => {
+    const { oldpassword, newpassword, conformpassword } = req.body;
+    if (!oldpassword || !newpassword || !conformpassword) {
+        return res.status(400).json("fill all fields!")
+
+    };
+    if (newpassword !== conformpassword) { return res.status(400).json("conform password does not match") }
+    User.findByPk(req.params.id).then(user =>
+        bcrypt.compare(oldpassword, user.password).then((ismatch) => {
+            if (!ismatch) { return res.status(400).json("old password credencials does not match") }
+
+            bcrypt.genSalt(10, (err, salt) =>
+                bcrypt.hash(newpassword, salt, (err, hash) => {
+                    password = hash;
+                    User.update(password, { where: { id: req.params.id }}).then(() =>
+                        User.findByPk(req.params.id).then((user) => res.json(user)).catch(err => { res.status(400).json(err) })
+                    ).catch(err => { res.status(400).json(err) })
+                })
+            )
+        }
+
+
+        ).catch(err => { res.status(400).json(err) })
+    )
+
+});
+router.post('/:id', auth, (req, res) => {
+
+    User.update(req.body,{ where: { id: req.params.id }}).
+       then((user) => res.json(user)).catch((err)=>res.status(400).json(err))
+    
+});
+
 module.exports = router;

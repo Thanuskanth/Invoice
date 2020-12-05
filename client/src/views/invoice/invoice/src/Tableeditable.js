@@ -6,19 +6,18 @@ import { addinvoicedec, adddisc, } from '../../../../actions/itemdescription'
 import { deletecurent } from '../../../../actions/invoiceacttion'
 import { getpropac } from '../../../../actions/program_package'
 import { connect } from 'react-redux';
-import { ImTab } from 'react-icons/im';
-import { getinvoice, updateinvoice } from '../../../../actions/invoiceacttion'
-import { ThreeSixtySharp } from '@material-ui/icons';
-import { removeFromStorage, setInStorage, getFromStorage } from "../../../../storage/index"
+import { updateinvoice } from '../../../../actions/invoiceacttion'
+import { setInStorage } from "../../../../storage/index"
+import Print from '../../../print/sample';
 
 class Table extends React.PureComponent {
   componentDidMount() {
-    
-   
+
+
     this.props.getItem();
     this.props.getpropac();
     this.ongetAmount()
-  
+
 
   }
 
@@ -55,20 +54,17 @@ class Table extends React.PureComponent {
     package_detail: "",
     pac_amm: 0,
     isprint: true,
-    savebut:"",
-    show:false
-  
+    savebut: "",
+    show: false
+
 
   }
 
   onSubmitinvoicedec = (e) => {
-    
-    e.preventDefault();
-    // console.log("this.state.role", this.state.role)
-    // setInStorage("program",this.props.curentinvoice); 
 
-    const data=  this.state.rows.map(row => {
-      return   {
+    e.preventDefault();
+    const data = this.state.rows.map(row => {
+      return {
         invoice: this.props.id,
         description: row.item + "-" + row.detail,
         amount: row.amount,
@@ -78,28 +74,20 @@ class Table extends React.PureComponent {
     })
 
     data.map(row => {
-     
+
       this.props.addinvoicedec(row);
 
     })
     setInStorage("items", data);
 
     this.props.deletecurent();
-    // const invoice = this.props.curentinvoice;
-    // invoice.total = this.getTotal();
-    // console.log(invoice, "invoiceinvoiceinvoice")
-    // this.props.updateinvoice(invoice); 
     this.setState({
       isprint: false,
-      savebut:"none",
-      show:true
-    
+      savebut: "none",
+      show: true
+
 
     })
-    // this.updateRows( this.state.rows);
-    
-
-
   }
 
   onChangeRowName = (event, aKey) => {
@@ -123,7 +111,6 @@ class Table extends React.PureComponent {
   }
 
   onChangeamo = (e) => {
-    // alert((e.target.value))
     var newData = this.state.rows.map(el => {
       if (el.id == e.target.id)
         return Object.assign(el, { total_amo: parseInt(e.target.value) })
@@ -187,7 +174,6 @@ class Table extends React.PureComponent {
     this.onChangeRowPrice(e.target.id)
   }
   onSelectdiscription = (e) => {
-    // alert("des")
     this.state.rows.filter(
       x => x.id == e.target.id
 
@@ -207,8 +193,7 @@ class Table extends React.PureComponent {
       return el
     });
     this.setState({ rows: newData });
-    // console.log(newData,"e target")
-    //    
+     
   }
 
   onSelectamount = (e) => {
@@ -225,7 +210,7 @@ class Table extends React.PureComponent {
           <td class=" col-7">
             <div class="row ">
               <div class=" col-5">
-                <select class="custom-select" required id={row.id}  value={row.item} onChange={this.onSelectitem}  >
+                <select class="custom-select" required id={row.id} value={row.item} onChange={this.onSelectitem}  >
                   <option >{row.item}</option>
                   {this.props.program_package.map((item) => (
                     <option value={item.program}>{item.program}</option>
@@ -264,39 +249,21 @@ class Table extends React.PureComponent {
           <td class=" col-2">
             <div class="form-group  ">
 
-              <input type="number" required class="form-control " style={{textAlign:"right"}} defaultValue={1} onChange={this.onSelectqty} id={row.id} aria-describedby="emailHelp" />
+              <input type="number" required class="form-control " style={{ textAlign: "right" }} defaultValue={1} onChange={this.onSelectqty} id={row.id} aria-describedby="emailHelp" />
             </div>
-            {/* <p
-              id={row.id}
-              title="name"
-              contentEditable
-              onBlur={(event) => this.onSelectqty('toName', event)}
-            >
-              0
-          </p> */}
 
           </td>
 
           <td class=" col-3">
 
-            {/* <div
-              style={{paddingTop:10 ,float:"right"}}
-              id={row.id}
-             
-            // onBlur={ this.onChangeRowPrice(row.id)}
-            >
-
-              {this.state.rows.find(x => x.id == row.id).total_amo.toFixed(2)}
-
-            </div> */}
             <div class="form-group  ">
 
-              <input type="number" class="form-control " style={{textAlign:"right"}} value={(this.state.rows.find(x => x.id == row.id).total_amo)} onChange={this.onChangeamo} id={row.id} />
+              <input type="number" class="form-control " style={{ textAlign: "right" }} value={(this.state.rows.find(x => x.id == row.id).total_amo)} onChange={this.onChangeamo} id={row.id} />
             </div>
 
             <div className='controls'>
               <AiOutlineClose
-                 display={this.state.savebut}
+                display={this.state.savebut}
 
                 color="red"
                 onClick={() => this.removeRow(row.id)} />
@@ -327,22 +294,22 @@ class Table extends React.PureComponent {
   }
 
   getTotal = () => {
-    const data= this.state.rows.reduce((count, { amount }) => count + amount, 0);
-    return parseInt(data ).toFixed(2);
+    const data = this.state.rows.reduce((count, { amount }) => count + amount, 0);
+    return parseInt(data).toFixed(2);
   }
 
   removeRow = (id) => {
-    console.log(this.state.rows,"this.init rows")
+    console.log(this.state.rows, "this.init rows")
 
     const rows = this.state.rows.filter(x => x.id != id);
-    console.log(rows,"this.rows")
+    console.log(rows, "this.rows")
     this.setState({
-      rows:rows
-    }) 
+      rows: rows
+    })
 
   }
 
- 
+
 
   toggleGenerateRowsModal = () => {
     this.setState({
@@ -370,7 +337,7 @@ class Table extends React.PureComponent {
   }
 
   render() {
- 
+
     this.ongetAmount()
 
     console.log(this.state.pac_amm, "staterow")
@@ -389,9 +356,9 @@ class Table extends React.PureComponent {
               </tr>
             </thead>
             <tbody>
-             
 
-              
+
+
               {this.getRows()}
 
             </tbody>
@@ -439,8 +406,8 @@ class Table extends React.PureComponent {
 
             </div>
             <div class="col-4">
-              <a href="/print"><button type="button" class="btn btn-lg btn-primary btn-block print" disabled={this.state.isprint} >print</button></a>
-
+              {/* <a href="/print"><button type="button" class="btn btn-lg btn-primary btn-block print" disabled={this.state.isprint} >print</button></a> */}
+              <Print />
             </div>
           </div>
 
@@ -460,6 +427,6 @@ const mapStateToProps = (state) => ({
   // isauthendicate:state.auth.isauthendicate
 
 })
-export default connect(mapStateToProps, { getpropac, getItem, addinvoicedec, updateinvoice, adddisc,deletecurent })(Table);
+export default connect(mapStateToProps, { getpropac, getItem, addinvoicedec, updateinvoice, adddisc, deletecurent })(Table);
 
 

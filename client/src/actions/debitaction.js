@@ -1,6 +1,5 @@
 import { GET_DEBIT,ADD_DEBIT,DELETE_DEBIT,UPDATE_DEBIT,UPP_DEBIT ,DELETE_UPDATEIN,DELETE_DEBITCUR} from './type';
 import axios from 'axios';
-import invoice from 'src/views/invoice';
 import {header} from './authaction';
 import{getFromStorage}from "../storage/index"
 

@@ -11,7 +11,7 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 import {
   Box,
- 
+
   Checkbox,
   Container,
   FormHelperText,
@@ -21,125 +21,143 @@ import {
   makeStyles
 } from '@material-ui/core';
 class AddOwner extends Component {
-    state = {
-        modalShow: false,
-         owner_name: ""
+  state = {
+    modalShow: false,
+    owner_name: "",
+    tag: ""
 
+  }
+
+  onChange = (e) => {
+    this.setState({
+      owner_name: e.target.value
+    })
+  }
+  onChangeTag = (e) => {
+    this.setState({
+      tag: e.target.value
+    })
+  }
+  onSubmit = (e) => {
+    e.preventDefault();
+    const owner = {
+      owner_name: this.state.owner_name,
+      tag: this.state.tag,
     }
+    this.props.addOwner(owner);
+    this.ontoggle()
+  }
 
-    onChange = (e) => {
-        this.setState({
-            owner_name: e.target.value
-        })
-    }
-    onSubmit = (e) => {
-        e.preventDefault();
-        console.log("this.state.owner_name", this.state.owner_name)
-
-        this.props.addOwner(this.state.owner_name);
-        this.ontoggle()
-    }
-
-    ontoggle = () => {
-        this.setState({
-            modalShow: !this.state.modalShow
-        })
-    }
+  ontoggle = () => {
+    this.setState({
+      modalShow: !this.state.modalShow
+    })
+  }
 
 
-    render() {
-        const { modalShow } = this.state;
-        return (
+  render() {
+    const { modalShow } = this.state;
+    return (
 
-            <div  >
- <Box
-                  display="flex"
-                  justifyContent="flex-end"
-                  mt={3}
-                >
-                 
-                  <Button
-                    color="primary"
-                    
-                    onClick={this.ontoggle} 
-                  >
-                   ADD {this.props.data}
-                  </Button>
-                </Box>
+      <div  >
+        <Box
+          display="flex"
+          justifyContent="flex-end"
+          mt={3}
+        >
 
-                
+          <Button
+            color="primary"
 
-               
+            onClick={this.ontoggle}
+          >
+            ADD {this.props.data}
+          </Button>
+        </Box>
 
-                <Modal
-                    show={modalShow}
-                    size="auto"
-                    aria-labelledby="contained-modal-title-vcenter"
-                    centered
-                >
-                    <Modal.Header closeButton onClick={this.ontoggle}>
-                        <Modal.Title  id="contained-modal-title-vcenter">
-                            {/* Create {this.props.data} */}
-              </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                    <Box
-        display="flex"
-        flexDirection="column"
-        height="100%"
-        justifyContent="center"
-      >
-        <Container maxWidth="sm">
-        
-              <form onSubmit={this.onSubmit}>
-                <Box mb={3} ml={12}>
-                  <Typography
-                    color="textSecondary"
-                    variant="h3"
-                  >
-                    Create New Owner
+
+
+
+
+        <Modal
+          show={modalShow}
+          size="auto"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Header closeButton onClick={this.ontoggle}>
+            <Modal.Title id="contained-modal-title-vcenter">
+              {/* Create {this.props.data} */}
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Box
+              display="flex"
+              flexDirection="column"
+              height="100%"
+              justifyContent="center"
+            >
+              <Container maxWidth="sm">
+
+                <form onSubmit={this.onSubmit}>
+                  <Box mb={3} ml={12}>
+                    <Typography
+                      color="textSecondary"
+                      variant="h3"
+                    >
+                      Create New Owner
                   </Typography>
-                  
-                </Box>
-              
-             
-             
-                 <TextField
-                  fullWidth
-                  required
-                  label="Owner"
-                  margin="normal"
-                  name="owner"                  
-                  variant="outlined"
-                  onChange={this.onChange}
 
-                />
-                
-               
-              
-                <Box ml={20}>
-                  <Button
-                    color="primary"
+                  </Box>
+
+
+
+                  <TextField
                     fullWidth
-                    size="large"
-                    type="submit"
-                    
-                  >
-                    Save
+                    required
+                    label="Owner"
+                    margin="normal"
+                    name="owner"
+                    variant="outlined"
+                    onChange={this.onChange}
+
+                  />
+                  <TextField
+                    fullWidth
+                    required
+                    label="Tag"
+                    margin="normal"
+                    name="tag"
+                    variant="outlined"
+                    onChange={this.onChangeTag}
+
+                  />
+
+
+
+                  <Box ml={20}>
+                    <Button
+                      color="primary"
+                      fullWidth
+                      size="large"
+                      type="submit"
+
+                    >
+                      Save
                   </Button>
-                </Box>
-                
-              </form>
-           
-        </Container>
-      </Box>
-                    </Modal.Body>
+                  </Box>
 
-                </Modal>
+                </form>
 
-            </div>
-        );
-    }
+              </Container>
+            </Box>
+          </Modal.Body>
+
+        </Modal>
+
+      </div>
+    );
+  }
 }
 
 export default connect(null, { addOwner })(AddOwner);

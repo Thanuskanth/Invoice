@@ -5,7 +5,7 @@ import{getFromStorage}from "../storage/index"
 
 export const getUser = () =>  (dispatch,getState) => {
 
-    axios.get('/user/',header(getState().auth.token)).then(res =>
+    axios.get('http://localhost:8080/user/',header(getState().auth.token)).then(res =>
         dispatch({
             type: GET_USER,
             payload: res.data
@@ -17,7 +17,7 @@ export const getUser = () =>  (dispatch,getState) => {
 export const addUser = (user) =>  (dispatch,getState) => {
     console.clear()
 
-  await  axios.post('/user/add',user).then(res =>
+    axios.post('http://localhost:8080/user/add',user).then(res =>
         dispatch({
             type: ADD_USER,
             payload:res.data.user
@@ -30,7 +30,7 @@ export const addUser = (user) =>  (dispatch,getState) => {
 
 export const deleteUser = (id) =>  (dispatch,getState) => {
 
-    axios.delete('/user/'+id,header(getState().auth.token)).then(() =>
+    axios.delete('http://localhost:8080/user/'+id,header(getState().auth.token)).then(() =>
         dispatch({
             type: DELETE_USER,
             payload: id

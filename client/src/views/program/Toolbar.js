@@ -20,6 +20,7 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
+import { tr } from 'date-fns/locale';
 class AddProgram extends Component {
     state = {
         modalShow: false,
@@ -100,9 +101,11 @@ class AddProgram extends Component {
                   
                 </Box>
               
+                <input className="form-control" style={{marginBottom:10}} type="text" onChange={this.onChange}  placeholder="Enter  Program" autofocus />
+
              
-             
-                 <TextField
+                 {/* <TextField
+                focused={true}
                   fullWidth
                   required
                   label="Program"
@@ -111,7 +114,7 @@ class AddProgram extends Component {
                   variant="outlined"
                   onChange={this.onChange}
 
-                />
+                /> */}
                 
                
               

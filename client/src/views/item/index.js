@@ -15,7 +15,14 @@ componentDidMount(){
 
     render() {
       const auth= getFromStorage("isauthendicate"); 
-
+      this.props.item.item.sort(function(a, b) {
+        var keyA =a.id,
+          keyB = b.id;
+        // Compare the 2 dates
+        if (keyA < keyB) return -1;
+        if (keyA > keyB) return 1;
+        return 0;
+      });
         const itemdata=this.props.item.item.map(item=>
                 {      
                   return{
@@ -74,7 +81,7 @@ componentDidMount(){
           >
             <Container maxWidth={false}>
               <Toolbar data={"Item"}/> 
-              <Box mt={5} >
+              <Box mt={4} >
               <Card >
              <CardContent>
               <MDBDataTable

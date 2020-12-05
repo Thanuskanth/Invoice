@@ -20,7 +20,7 @@ export const getAitem=(id)=>(dispatch,getState)=>{
         .catch(err => console.log(err))
 }
 export const updateItem = ( item) => (dispatch,getState,) => {
-    axios.post('http://localhost:8080/item/' +item.id,{ item_name:item.item_name,amount:item.amount,detail:item.detail,},header(getFromStorage("auth"))).then(res =>
+    axios.post('http://localhost:8080/item/' +item.id,{ item_name:item.item_name,amount:item.amount,detail:item.detail,service:item.service},header(getFromStorage("auth"))).then(res =>
         dispatch({
             type: UPDATE_ITEM,
             _id:item.id,

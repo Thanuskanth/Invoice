@@ -1,6 +1,5 @@
 import { GET_PROPAC,ADD_PROPAC,DELETE_PROPAC,UPDATE_PROPAC } from './type';
 import axios from 'axios';
-import invoice from 'src/views/invoice';
 import {header} from './authaction';
 import{getFromStorage}from "../storage/index"
 
@@ -21,22 +20,20 @@ export const getApropac=(id)=>(dispatch,getState)=>{
         .catch(err => console.log(err))
 }
 export const updatepropac = (id, invoice) => (dispatch,getState,) => {
-    axios.post('http://localhost:8080/program_package/' +invoice.id,{
-         package:invoice.package,
-    owner:invoice.owner,
-    date:invoice.date,
-    program:invoice.program,
+    axios.post('http://localhost:8080/program_package/' +id,{
+    packageId:invoice.packageId,
+    ownerId:invoice.ownerId,
+    programId:invoice.programId,
      order_id:invoice.order_id,
-     total:invoice.total,
-     customer_name:invoice.customer_name,
-     nic:invoice.nic,
-     phonenumber:invoice.phonenumber,
-    address:invoice.address
+     amount:invoice.amount,
+     items:invoice.items,
+     service:invoice.service,
+     
 },header(getFromStorage("auth"))).then(res =>
         dispatch({
             type: UPDATE_PROPAC,
-            _id:invoice.id,
-           payload:invoice
+            _id:id,
+           payload:res.data
         })
     ).catch(err => console.log(err))
 

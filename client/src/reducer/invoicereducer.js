@@ -39,7 +39,7 @@ export default function (state = initialState, action) {
                         ...state,
                         invoice: [...state.invoice, action.payload],
                         curentinvoice:action.payload,
-                        iscurent:false
+                        // iscurent: true
                     }
             case DELETE_UPDATEIN:
                     // state.invoice=state.invoice.filter(invoice=>invoice.id!==action._id)

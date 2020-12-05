@@ -28,13 +28,13 @@ import { useReactToPrint } from 'react-to-print';
 const Example = () => {
   const componentRef = useRef();
  useReactToPrint({
-    content: () => <Debit  />,
+    // content: () => <Debit  />,
   });
 
   return (
     <div >
-      <Debit ref={componentRef} />
-      <button >Print this out!</button>
+      <Debit  />
+      {/* <button >Print this out!</button> */}
     </div>
   );
 };

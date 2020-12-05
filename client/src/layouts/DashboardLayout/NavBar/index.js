@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
 import {
   Avatar,
   Box,
@@ -24,6 +23,7 @@ import {
   Users as UsersIcon
 } from 'react-feather';
 import NavItem from './NavItem';
+import User from './user';
 import PrintProvider, { NoPrint } from 'react-easy-print';
 
 const user = {
@@ -70,15 +70,25 @@ const items = [
     title: 'Invoice'
   },
   {
-    href: '/app/receipt',
+    href: '/app/Receipt',
     icon: LockIcon,
     title: 'Receipt'
+  },
+  {
+    href: '/app/service',
+    icon: LockIcon,
+    title: 'Service'
   },
   {
     href: '/app/program_package',
     icon: LockIcon,
     title: 'Program Package'
   },
+  // {
+  //   href: '/login',
+  //   icon: LockIcon,
+  //   title: 'Login'
+  // },
   // {
   //   href: '/register',
   //   icon: UserPlusIcon,
@@ -89,14 +99,12 @@ const items = [
 
 const useStyles = makeStyles(() => ({
   mobileDrawer: {
-    width: 256,
-
+    width: 256
   },
   desktopDrawer: {
-    width: 250,
-    position:'fixed',
-    height:800,  
-    top: 85,
+    width: 256,
+    top: 64,
+    height: 'calc(100% - 64px)' ,
     zIndex:0
   },
   avatar: {
@@ -127,7 +135,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
       display="flex"
       flexDirection="column"
     >
-      {/* <Box
+      <Box
         alignItems="center"
         display="flex"
         flexDirection="column"
@@ -139,22 +147,10 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           src={user.avatar}
           to="/app/account"
         />
-        <Typography
-          className={classes.name}
-          color="textPrimary"
-          variant="h5"
-        >
-          {user.name}
-        </Typography>
-        <Typography
-          color="textSecondary"
-          variant="body2"
-        >
-          {user.jobTitle}
-        </Typography>
+       <User/>
       </Box>
-      <Divider /> */}
-      <Box p={3}>
+      <Divider />
+      <Box p={2}>
         
         <List>
           {items.map((item) => (
@@ -180,10 +176,10 @@ const NavBar = ({ onMobileClose, openMobile }) => {
   );
 
   return (
-    <PrintProvider>
+    
     <NoPrint>
        
-      {/* <Hidden >
+      <Hidden lgUp>
         <Drawer
           anchor="left"
           classes={{ paper: classes.mobileDrawer }}
@@ -193,8 +189,8 @@ const NavBar = ({ onMobileClose, openMobile }) => {
         >
           {content}
         </Drawer>
-      </Hidden> */}
-      <Hidden >
+      </Hidden>
+      <Hidden mdDown>
         <Drawer
           anchor="left"
           classes={{ paper: classes.desktopDrawer }}
@@ -206,7 +202,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
       </Hidden>
     </NoPrint>
 
-    </PrintProvider>
+  
        
           );
 };

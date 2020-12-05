@@ -1,4 +1,4 @@
-import { GET_ERROR, CLEAR_ERROR } from "../action/types"
+import { GET_ERROR, CLEAR_ERROR } from "../actions/type"
 const initialstate = {
     msg: {},
     status: null,

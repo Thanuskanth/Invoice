@@ -68,7 +68,7 @@ const {username,email,password}=this.state;
         }
     }
     componentDidMount(){
-      window.location.replace("/app/invoice")
+    //   window.location.replace("/app/invoice")
 
     }
     render() {
@@ -76,30 +76,6 @@ const {username,email,password}=this.state;
 
             <div>
 
-                <NavLink color="dark" onClick={this.toggole} href="#" >Register</NavLink>
-                <Modal isOpen={this.state.modal} >
-                    <ModalHeader  toggle={this.toggole}   >Register</ModalHeader>
-        {this.state.msg ? (<Alert color="danger">{this.state.msg}</Alert>) : null}
-                    <ModalBody>
-                        <Form onSubmit={this.onSubmit}>
-                            <FormGroup>
-                                <Label for="name">UserName</Label>
-                                <Input type="text" id="name" onChange={this.onChangeusername} placeholder="Enter UserName" />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label for="email">Email</Label>
-                                <Input type="text" id="email" onChange={this.onChangeemail} placeholder="Enter Email " />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label for="password">Password</Label>
-                                <Input type="text" id="password" onChange={this.onChangepassword} placeholder="Enter Password " />
-                            </FormGroup>
-                            <Button>Submit</Button>
-
-                        </Form>
-                    </ModalBody>
-
-                </Modal>
             </div>
 
         )

@@ -1,11 +1,12 @@
 module.exports = (sequelize, Sequelize) => {
     const Program_Package = sequelize.define("program_package", {
      
-      pac: {
-        type: Sequelize.STRING
+    
+      items: {
+        type: Sequelize.STRING(1234)
       },
-      program: {
-        type: Sequelize.STRING
+      service: {
+        type: Sequelize.STRING(1234)
       },
      
       amount: {

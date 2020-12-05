@@ -30,11 +30,19 @@ componentDidMount(){
     render() {
      
       const auth= getFromStorage("isauthendicate"); 
-
+      this.props.owner.owner.sort(function(a, b) {
+        var keyA =a.id,
+          keyB = b.id;
+        // Compare the 2 dates
+        if (keyA < keyB) return -1;
+        if (keyA > keyB) return 1;
+        return 0;
+      });
         const ownerdata=this.props.owner.owner.map(owner=>
                 {      
                   return{
                    name:owner.owner_name,
+                   tag:owner.tag,
                      
                       action:<Update id={owner.id}/>
                       }
@@ -49,7 +57,13 @@ componentDidMount(){
                    
                     width: 150
                 },
-               
+                {
+                  label: 'Tag',
+                  field: 'tag',
+                 
+                  width: 150
+              },
+             
                
                 {
                     label: 'Action',
@@ -75,15 +89,21 @@ componentDidMount(){
           >
             <Container maxWidth={false}>
               <Toolbar data={"Owner"}/> 
-              <Box mt={5} >
+              <Box mt={4} >
               <Card >
-             <CardContent>
+             <CardContent >
               <MDBDataTable
                entriesOptions={[5, 20, 25]}
                entries={5}
-                     striped
-                     hover
+                      display="inline"
                      data={data}
+                     hover
+                     entriesOptions={[5, 10]}
+                     entries={5}
+                     pagesAmount={4}
+                     pagingTop
+                     searchTop
+                     searchBottom={false}
                 />
                 </CardContent>
                 </Card>

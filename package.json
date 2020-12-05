@@ -1,12 +1,16 @@
 {
+  "homepage": "http://Thanuskanth.github.io/Invoice",
   "name": "invoice",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "predeploy": "npm run build --prefix client",
+    "deploy": "gh-pages -d build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "nodemon server.js",
     "start": "node server.js",
+    "dev": "concurrently \"npm start --prefix client\" \"npm run serve\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [],
@@ -15,6 +19,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "concurrently": "^5.3.0",
     "config": "^3.3.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -25,5 +30,8 @@
     "path": "^0.12.7",
     "react-datepicker": "^3.3.0",
     "sequelize": "^6.3.5"
+  },
+  "devDependencies": {
+    "gh-pages": "^3.1.0"
   }
 }

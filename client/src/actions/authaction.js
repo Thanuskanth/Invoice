@@ -2,7 +2,7 @@ import axios from 'axios';
 import {
     LOGIN_FAIL,
     LOGIN_SUCCESS,
-    AUTH_ERROR,
+    UPDATE_USER,
     LOGOUT_SUCCESS,
     REGISTER_SUCCESS,
     REGISTER_FAIL,
@@ -44,13 +44,11 @@ export const userloading = () => (dispatch, setstate) => {
     }).catch(err => {
         removeFromStorage("auth")
         setInStorage("isauthendicate",false);
-
+        console.log(err.response)
         dispatch(getError(err.response.data,err.response.status))
-        dispatch(
-            
-            { type: AUTH_ERROR })
+       
     })
-
+ 
 
 }
 export const register = (user) => dispatch => {
@@ -112,7 +110,9 @@ export const login = (user) => dispatch => {
             payload: res.data
         });
     }).catch(err => {
-        getError(err.response.data,err.response.status,"login_error")
+        console.log(err)
+
+        dispatch( getError(err.response.data,err.response.status,"login_error"))
         removeFromStorage("auth")
         setInStorage("isauthendicate",false);
 
@@ -121,3 +121,27 @@ export const login = (user) => dispatch => {
 
 
 }
+export const updatepassword = (id, password) => (dispatch, getState) => {
+    axios.post('http://localhost:8080/user/password/' + id, password, header(getFromStorage("auth"))).then(
+        dispatch(getError("password changed", null, "pwd_success"))
+
+    ).catch(err => { dispatch(getError(err.response.data, err.response.status, "password_change")) }
+    )
+
+};
+export const updateuser = (id, user) => (dispatch, getState) => {
+    axios.post('http://localhost:8080/user/' + id, user, header(getFromStorage("auth"))).then(res =>
+        dispatch({
+            type: UPDATE_USER,
+            payload: res.data
+        })
+        
+    )
+        .catch(err => 
+            
+            // { 
+                console.log(err,"sdsdsdsssss")
+                // dispatch(getError(err.response.data, err.response.status, "updateuser_error")) }
+            )
+
+}; 

@@ -60,6 +60,12 @@ export const DELETE_OWNER="DELETE_OWNER";
 export const ADD_OWNER="ADD_OWNER";
 export const GET_OWNER="GET_OWNER";
 
+
+export const UPDATE_SERVICE="UPDATE_SERVICE";
+export const DELETE_SERVICE="DELETE_SERVICE";
+export const ADD_SERVICE="ADD_SERVICE";
+export const GET_SERVICE="GET_SERVICE";
+
 export const LOADING='LOADING';
 export const GET_ERROR='GET_ERROR';
 export const CLEAR_ERROR='CLEAR_ERROR';
@@ -75,3 +81,8 @@ export const LOGIN_FAIL='LOGIN_FAIL';
 export const REGISTER_FAIL='REGISTER_FAIL';
 export const AUTH_ERROR='AUTH_ERROR';
 export const UPDATE_USER='UPDATE_USER';
+
+
+export const DELETE_USER="DELETE_USER";
+export const ADD_USER="ADD_USER";
+export const GET_USER="GET_USER";

@@ -12,6 +12,7 @@ import { ThreeSixtySharp } from '@material-ui/icons';
 import { removeFromStorage, setInStorage, getFromStorage } from "../../../storage/index"
 import { adddebit, deletedebitcurent, updatedebit } from '../../../actions/debitaction';
 import { adddebitdec, updatedebitdec } from '../../../actions/debitdescription';
+import Print from '../create_print';
 
 class Table extends React.PureComponent {
   componentDidMount() {
@@ -65,7 +66,7 @@ class Table extends React.PureComponent {
 
   }
 
-  onSubmitinvoicedec = (e) => {
+    onSubmitinvoicedec = (e) => {
 
 
     // console.log("this.state.role", this.state.role)
@@ -73,46 +74,46 @@ class Table extends React.PureComponent {
     // if (this.state.but == "GENERETE") {
 
     e.preventDefault();
-    if(this.props.curent.balance_due >= this.getTotal()){
+    if (this.props.curent.balance_due >= this.getTotal()) {
 
       const data = this.state.rows.map(row => {
         return {
           debitnoteId: this.props.curent.id,
           description: row.item,
           amount: row.total_amo,
-  
+
         }
-  
+
       })
-  
+
       data.map(row => {
-  
+
         this.props.adddebitdec(row);
-  
+
       })
-      setInStorage("debitdet",data)
+      // setInStorage("debitdet", data)
       const newamount = {
         id: this.props.curent.id,
         total: this.getTotal()
-  
+
       }
       this.props.updatedebit(newamount)
-      setInStorage("debit_total",this.getTotal())
-  
+      // setInStorage("debit_total", this.getTotal())
+
       this.props.deletedebitcurent()
       this.setState({
         savebut: "none",
         isprint: !this.state.isprint
       })
-  
-  
+
+
 
     }
-else{
-  alert("total must less than "+this.props.curent.balance_due)
-}
+    else {
+      alert("total must less than " + this.props.curent.balance_due)
+    }
     // this.props.deletecurent();
-    
+
 
 
 
@@ -137,7 +138,7 @@ else{
       this.props.updatedebitdec(row);
 
     })
-    setInStorage("debitdet",data)
+    // setInStorage("debitdet", data)
     const newamount = {
       id: this.props.curent.id,
       total: this.getTotal()
@@ -276,8 +277,8 @@ else{
               <div class=" col-8">
                 <select class="custom-select" required id={row.id} disabled={!this.props.iscurent} value={row.item} onChange={this.onSelectitem}  >
                   <option >{row.item}</option>
-                  {this.props.program_package.map((item) => (
-                    <option value={item.program}>{item.program}</option>
+                  {this.props.program_package.filter((obj =>obj.ownerId == this.props.curent.invoice.ownerId )).map((item) => (
+                    <option value={item.programs.program_name}>{item.programs.program_name}</option>
                   )
                   )
                   }
@@ -324,8 +325,8 @@ else{
       ...this.state.rows,
       {
         id: this.state.num,
-        item: 'Daily work',
-        detail: 20,
+        item: '',
+        detail: "",
         amount: 0,
         count: 1,
         total_amo: 0,
@@ -450,8 +451,12 @@ else{
 
             </div>
             <div class="col-4">
-              <a href="/print_debit"><button type="button" class="btn btn-lg btn-primary btn-block print" disabled={this.state.isprint} >print</button></a>
-
+              {/* <a href="/print_debit"><button type="button" class="btn btn-lg btn-primary btn-block print" disabled={this.state.isprint} >print</button></a> */}
+             {/* {
+               this.props.iscurent ?
+               :""
+              } */}
+              <Print id={this.props.curent.id} />
             </div>
           </div>
 

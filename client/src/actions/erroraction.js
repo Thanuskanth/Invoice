@@ -1,4 +1,4 @@
-import { GET_ERROR, CLEAR_ERROR, } from '../actions/type';
+import { GET_ERROR, CLEAR_ERROR, } from './type';
 import axios from 'axios';
 
 export const getError = ( msg ,status,id=null ) => dispatch => {

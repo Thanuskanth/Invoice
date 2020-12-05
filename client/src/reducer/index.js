@@ -11,6 +11,8 @@ import authreducer from './authreducer';
 import receiptreducer from './receiptreducer';
 import debitreducer from './debitreducer';
 import debitdescriptionreducer from './debitdescription';
+import error from './errorreducer';
+import service from './service';
 // import debitreducer from './debitdescription';
 export default combineReducers({
     customer:customerreducer,
@@ -22,6 +24,8 @@ export default combineReducers({
     invoicedescription:invoicedescreducer,
     auth:authreducer,
     receipt:receiptreducer,
+    error:error,
+    service:service,
     program_package:program_packagereducer,
     debit:debitreducer,
     

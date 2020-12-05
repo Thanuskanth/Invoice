@@ -33,7 +33,8 @@ class UpdateOwner extends Component {
     state = {
         modalShow: false,
         owner:{},
-        owner_name: ""
+        owner_name: "",
+        tag:""
        
 
     }
@@ -52,6 +53,7 @@ class UpdateOwner extends Component {
         // console.log("this.state.role", this.state.role)
         const owner={
             owner_name:this.state.owner_name,
+            tag:this.state.tag,
            
             id:this.props.id
         }
@@ -69,6 +71,11 @@ class UpdateOwner extends Component {
             modalShow: !this.state.modalShow
         })
         this.componentDidMount();
+    }
+    onChangeTag = (e) => {
+      this.setState({
+        tag: e.target.value
+      })
     }
     componentDidMount() {
         console.log(this.props,"props")
@@ -175,7 +182,16 @@ class UpdateOwner extends Component {
                   onChange={this.onChangeowner_name}
 
                 />
-                
+                 <TextField
+                    fullWidth
+                    required
+                    label="Tag"
+                    margin="normal"
+                    name="tag"
+                    variant="outlined"
+                    onChange={this.onChangeTag}
+
+                  />
                
               
                 <Box ml={20}>

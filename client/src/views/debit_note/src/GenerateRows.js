@@ -2,8 +2,8 @@ import React from 'react';
 import moment from 'moment';
 import { DateRange } from 'react-date-range';
 
-import 'react-date-range/dist/styles.css'; // main css file
-import 'react-date-range/dist/theme/default.css'; // theme css file
+// import 'src/views/invoice/create/node_modules/react-date-range/dist/styles.css'; // main css file
+// import 'src/views/invoice/create/node_modules/react-date-range/dist/theme/default.css'; // theme css file
 import './GenerateRows.css';
 
 class GenerateRows extends React.PureComponent {

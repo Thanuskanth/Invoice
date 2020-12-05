@@ -2,6 +2,9 @@ module.exports = (sequelize, Sequelize) => {
     const Owner = sequelize.define("owners", {
       owner_name: {
         type: Sequelize.STRING
+      },
+      tag: {
+        type: Sequelize.STRING
       }
      
     });

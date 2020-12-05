@@ -30,17 +30,13 @@ router.post('/add',(req, res) => {
                 jwt.sign(
                     {id:user.id},
                     config.get('jwtSecred'),
-                    {expiresIn:3600},
+                    // {expiresIn:3600},
                     (err,token)=>{
                         if(err) throw err;
                         res.json({
 
-                                token,
-                            user: {
-                                name: user.username,
-                                email: user.email,
-                                id: user.id
-                            }
+                        token,
+                            user
                         })
                     }
                 )

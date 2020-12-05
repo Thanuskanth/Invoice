@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, AUTH_ERROR,USER_LOADING, USER_LODED,UPDATE_USER,DELETE_LEAVE,UPDATE_LEAVE ,ADD_LEAVE} from '../actions/type';
+import { LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, AUTH_ERROR,USER_LOADING,REGISTER_SUCCESS, USER_LODED,UPDATE_USER,DELETE_LEAVE,UPDATE_LEAVE ,ADD_LEAVE} from '../actions/type';
 import{ removeFromStorage,setInStorage} from "../storage/index"
 
 const initialState = {
@@ -14,6 +14,7 @@ export default function (state = initialState, action) {
             }
             
         case LOGIN_SUCCESS:
+        case REGISTER_SUCCESS:
 
             return {
                 ...state,

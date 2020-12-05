@@ -565,7 +565,7 @@ export default function SimpleCard() {
     
       <MDBDataTableV5
   hover
-  entriesOptions={[5, 20, 25]}
+  entriesOptions={[5, 10, 25]}
   entries={5}
   pagesAmount={4}
   data={data}

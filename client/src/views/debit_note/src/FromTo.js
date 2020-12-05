@@ -61,7 +61,8 @@ onSubmitinvoicedec = (e) => {
       this.setState({
 
         invoice: res.data,
-        address:JSON.parse(res.data.address)
+        customer: res.data.customers,
+        address:JSON.parse(res.data.customers.address)
 
       })
     })
@@ -84,6 +85,7 @@ onSubmitinvoicedec = (e) => {
   state = {
   invoice:{},
   address:[],
+  customer:[],
   amount:0,
   gen:false,
   total:0,
@@ -96,7 +98,7 @@ onSubmitinvoicedec = (e) => {
       invoice:this.state.invoice
 
     }
-    setInStorage("debit",data);
+    // setInStorage("debit",data);
     console.log( this.state," this.props.receipt.filter(x=>x.id==this.props.id)")
   
     return (
@@ -111,18 +113,18 @@ onSubmitinvoicedec = (e) => {
                 <div class="form-group row">
                   <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
                   <div class="col-sm-10">
-                  <input type="text"  class="form-control datepica " disabled  value={this.state.invoice.customer_name}  />
+                  <input type="text"  class="form-control datepica " disabled  value={this.state.customer.customer_name}  />
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="staticEmail" class="col-sm-2 col-form-label">NIC</label>
                   <div class="col-sm-10">
-                  <input type="text"  class="form-control datepica" disabled value={this.state.invoice.nic} />
+                  <input type="text"  class="form-control datepica" disabled value={this.state.customer.nic} />
                   </div>
                 </div><div class="form-group row">
                   <label for="staticEmail" class="col-sm-2 col-form-label">Phone</label>
                   <div class="col-sm-10">
-                  <input type="text"  class="form-control datepica" disabled value={this.state.invoice.phonenumber}/>
+                  <input type="text"  class="form-control datepica" disabled value={this.state.customer.phonenumber}/>
                   </div>
                 </div>
                 <div class="form-group row">

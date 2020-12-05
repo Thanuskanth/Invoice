@@ -1,6 +1,5 @@
 import { GET_INVOICEDESC,ADD_INVOICEDESC,DELETE_INVOICEDESC,UPDATE_INVOICEDESC,UPP_INVOICEDESC ,DELETE_UPDATEIN} from './type';
 import axios from 'axios';
-import invoice from 'src/views/invoice';
 import {header} from './authaction';
 import{getFromStorage}from "../storage/index"
 
@@ -26,6 +25,7 @@ export const updateinvoicedec = ( invoice) => (dispatch,getState,) => {
      total:invoice.total,
      description:invoice.description,
      amount:invoice.amount,
+     service:invoice.service,
      count:invoice.count,
     },header(getFromStorage("auth"))).then(res =>
         dispatch({

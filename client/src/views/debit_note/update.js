@@ -45,8 +45,7 @@ class UpdateCustomer extends Component {
     this.setState({
       modalInvoiceShow: !this.state.modalInvoiceShow
     })
-    removeFromStorage("items");
-    removeFromStorage("program");
+   
 
   }
   ontogglereceiptdetail = () => {
@@ -55,6 +54,8 @@ class UpdateCustomer extends Component {
     })
   }
   ontoggle = () => {
+    removeFromStorage("debitdet")
+ 
     this.setState({
       modalshow: !this.state.modalshow
     })

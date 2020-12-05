@@ -16,8 +16,8 @@ export const getOwner = () => (dispatch,getState) => {
 
 };
 
-export const addOwner = (owner_name) => (dispatch,getState) => {
-    axios.post('http://localhost:8080/owner/add', { owner_name },header(getFromStorage("auth"))).then(res =>
+export const addOwner = (owner) => (dispatch,getState) => {
+    axios.post('http://localhost:8080/owner/add', { owner_name:owner.owner_name,tag:owner.tag },header(getFromStorage("auth"))).then(res =>
         dispatch({
             type: ADD_OWNER,
             _id: res.data._id,
@@ -38,7 +38,7 @@ export const deleteOwner = (id) => (dispatch,getState) => {
 
 };
 export const updateOwner = (owner) => (dispatch,getState) => {
-    axios.post('http://localhost:8080/owner/' + owner.id, { owner_name: owner.owner_name},header(getFromStorage("auth"))).then(res =>
+    axios.post('http://localhost:8080/owner/' + owner.id, { owner_name: owner.owner_name,tag: owner.tag},header(getFromStorage("auth"))).then(res =>
         dispatch({
             type: UPDATE_OWNER,
             _id:owner.id,

@@ -88,7 +88,7 @@ const {username,email,password}=this.state;
                             </FormGroup>
                             <FormGroup>
                                 <Label for="password">Password</Label>
-                                <Input type="text" id="password" onChange={this.onChangepassword} placeholder="Enter Password " />
+                                <Input type="password" id="password" onChange={this.onChangepassword} placeholder="Enter Password " />
                             </FormGroup>
                             <Button>Submit</Button>
 
